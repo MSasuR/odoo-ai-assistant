@@ -1,0 +1,5 @@
+# Keep LF line endings everywhere (shell scripts and Dockerfiles break with CRLF on Linux/CI).
+* text=auto eol=lf
+*.sh text eol=lf
+Dockerfile text eol=lf
+*.png binary

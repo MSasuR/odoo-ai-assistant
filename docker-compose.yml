@@ -1,0 +1,68 @@
+# Full local demo: Odoo 19 (with demo data) + the assistant API + pgvector.
+# The credentials below are demo-only and every port is bound to localhost.
+name: odoo-ai-assistant
+
+services:
+  odoo-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+      POSTGRES_DB: postgres
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  odoo:
+    image: odoo:19.0
+    depends_on:
+      odoo-db:
+        condition: service_healthy
+    environment:
+      HOST: odoo-db
+      USER: odoo
+      PASSWORD: odoo
+    ports:
+      - "127.0.0.1:${ODOO_PORT:-8069}:8069"
+    volumes:
+      - odoo-data:/var/lib/odoo
+      - ./odoo_addon:/mnt/extra-addons:ro
+
+  pgvector:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: rag
+      POSTGRES_PASSWORD: rag
+      POSTGRES_DB: rag
+    volumes:
+      - pgvector-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rag"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  assistant:
+    build:
+      context: .
+      target: runtime
+    env_file: .env
+    depends_on:
+      pgvector:
+        condition: service_healthy
+      odoo-db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${ASSISTANT_PORT:-8000}:8000"
+    volumes:
+      - ./corpus:/app/corpus:ro
+    restart: unless-stopped
+
+volumes:
+  odoo-db-data:
+  odoo-data:
+  pgvector-data:

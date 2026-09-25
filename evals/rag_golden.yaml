@@ -1,0 +1,51 @@
+# Golden set for the retriever, written against the sample corpus in corpus/.
+# `expect`: any of these (file, section) counts as a hit. `section` is a fragment of the chunk heading.
+# Questions are paraphrased on purpose (they avoid the documents' own wording), and the
+# out-of-scope list includes plausible-but-absent topics, which are the hardest to reject.
+in_scope:
+  - q: "How far ahead do I have to ask for a long holiday?"
+    expect: [{source: hr/leave-policy.md, section: "Requesting leave"}]
+  - q: "Who approves my time-off request and how long do they have to answer?"
+    expect: [{source: hr/leave-policy.md, section: "Approval"}]
+  - q: "Can I keep unused vacation days for next year?"
+    expect: [{source: hr/leave-policy.md, section: "Carry-over"}]
+  - q: "Do I need a doctor's note if I am ill for three days?"
+    expect: [{source: hr/leave-policy.md, section: "Sick leave"}]
+  - q: "How many days per week am I allowed to work from home?"
+    expect: [{source: hr/remote-work.md, section: "Eligibility"}]
+  - q: "Does the company pay for my desk chair at home?"
+    expect: [{source: hr/remote-work.md, section: "home office equipment"}]
+  - q: "Can I work from another country for a few weeks?"
+    expect: [{source: hr/remote-work.md, section: "another country"}]
+  - q: "What discount can a salesperson give without asking anyone?"
+    expect: [{source: sales/quotation-process.md, section: "Discount approval"}]
+  - q: "For how long is a quotation valid?"
+    expect: [{source: sales/quotation-process.md, section: "Creating a quotation"}]
+  - q: "Do very large orders need a signed contract?"
+    expect: [{source: sales/quotation-process.md, section: "Contracts"}]
+  - q: "What happens to a customer who is 60 days late paying?"
+    expect: [{source: finance/invoicing-and-collections.md, section: "Payment reminders"}]
+  - q: "How do I correct a mistake on an invoice that is already posted?"
+    expect: [{source: finance/invoicing-and-collections.md, section: "Issuing invoices"},
+             {source: finance/invoicing-and-collections.md, section: "Credit notes"}]
+  - q: "By when do I need to submit an expense claim?"
+    expect: [{source: finance/expense-reimbursement.md, section: "Submitting a claim"}]
+  - q: "How much can I spend on meals during a business trip?"
+    expect: [{source: finance/expense-reimbursement.md, section: "Daily allowances"}]
+  - q: "When do approved expense claims get paid?"
+    expect: [{source: finance/expense-reimbursement.md, section: "Approval and payment"}]
+  - q: "What should I do if my laptop is stolen?"
+    expect: [{source: it/security-basics.md, section: "Lost or stolen"}]
+  - q: "How long does my password have to be?"
+    expect: [{source: it/security-basics.md, section: "Passwords"}]
+  - q: "How long is the probation period and who reviews me?"
+    expect: [{source: onboarding/first-week.md, section: "Probation"}]
+out_of_scope:
+  - "What is the recipe for chocolate cake?"
+  - "Who won the football World Cup in 2014?"
+  - "What is the capital of Australia?"
+  - "How do I change the oil in my car?"
+  - "What is the company's policy on bringing pets to the office?"
+  - "How is the annual performance bonus calculated?"
+  - "Which pension plan does the company offer?"
+  - "How do I book a meeting room?"

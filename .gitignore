@@ -1,0 +1,21 @@
+# secrets and local config
+.env
+.env.*
+!.env.example
+
+# private corpus and generated eval output
+corpus/private/
+evals/results/
+
+# python / tooling
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
