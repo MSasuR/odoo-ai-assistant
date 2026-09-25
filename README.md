@@ -10,6 +10,10 @@ OpenAI**. It acts strictly as the logged-in user: the model can only see what th
 > A personal, from-scratch project. It runs on Odoo's public demo data and a fictional document
 > corpus written for this repository.
 
+<p align="center">
+  <img src="docs/img/chat.jpg" alt="The AI Assistant chat panel inside Odoo 19, opened from the top bar" width="380">
+</p>
+
 ```
 You:        How many vacation days do I have left, and how much notice do I need for more than five days?
 Assistant:  You have 20.0 days left (Paid Time Off). For more than five consecutive days you must request
