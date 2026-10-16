@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:3.12-slim AS runtime
+FROM python:3.14-slim AS runtime
 
 # Run as an unprivileged user.
 RUN useradd --create-home --uid 1000 app
